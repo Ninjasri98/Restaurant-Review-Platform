@@ -1,5 +1,8 @@
 package com.ninjasri98.restaurant.services;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.ninjasri98.restaurant.domain.RestaurantCreateUpdateRequest;
 import com.ninjasri98.restaurant.domain.entities.Restaurant;
 
