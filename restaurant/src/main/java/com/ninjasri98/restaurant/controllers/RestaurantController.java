@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,6 +56,13 @@ public class RestaurantController {
                 radius,
                 PageRequest.of(page - 1, size));
         return searchResult.map(restaurantMapper::toSummaryDto);
+    }
+
+    @GetMapping("/{restaurantId}")
+    public ResponseEntity<RestaurantDto> getRestaurant(@PathVariable String restaurantId) {
+        return restaurantService.getRestaurant(restaurantId)
+                .map(restaurant -> ResponseEntity.ok(restaurantMapper.toRestaurantDto(restaurant)))
+                .orElse(ResponseEntity.notFound().build());
     }
 
 }

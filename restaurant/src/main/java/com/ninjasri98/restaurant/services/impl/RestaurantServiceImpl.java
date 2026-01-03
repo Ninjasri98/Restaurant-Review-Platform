@@ -2,6 +2,7 @@ package com.ninjasri98.restaurant.services.impl;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -72,6 +73,12 @@ public class RestaurantServiceImpl implements RestaurantService {
         }
         // Otherwise we'll perform a non-location search
         return restaurantRepository.findAll(pageable);
+    }
+
+    @Override
+    public Optional<Restaurant> getRestaurant(String id) {
+        // Delegate to the repository to fetch the restaurant by ID
+        return restaurantRepository.findById(id);
     }
 
 }
