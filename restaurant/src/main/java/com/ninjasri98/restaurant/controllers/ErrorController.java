@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ninjasri98.restaurant.domain.dtos.ErrorDto;
 import com.ninjasri98.restaurant.exceptions.BaseException;
+import com.ninjasri98.restaurant.exceptions.RestaurantNotFoundException;
 import com.ninjasri98.restaurant.exceptions.StorageException;
 
 import lombok.extern.slf4j.Slf4j;
@@ -66,6 +67,16 @@ public class ErrorController {
                 .message("Validation failed: " + errorMessage)
                 .build();
         return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(RestaurantNotFoundException.class)
+    public ResponseEntity<ErrorDto> handleRestaurantNotFoundException(RestaurantNotFoundException ex) {
+        log.error("Caught RestaurantNotFoundException", ex);
+        ErrorDto errorDto = ErrorDto.builder()
+                .status(HttpStatus.NOT_FOUND.value())
+                .message("The specified restaurant wasn't found")
+                .build();
+        return new ResponseEntity<>(errorDto, HttpStatus.NOT_FOUND);
     }
 
 }

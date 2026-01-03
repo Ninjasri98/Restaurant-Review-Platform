@@ -19,5 +19,7 @@ public interface RestaurantService {
             Float radius,
             Pageable pageable);
 
-        Optional<Restaurant> getRestaurant(String id);
+    Optional<Restaurant> getRestaurant(String id);
+
+    Restaurant updateRestaurant(String id, RestaurantCreateUpdateRequest restaurant);
 }
