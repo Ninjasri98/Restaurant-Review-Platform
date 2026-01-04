@@ -17,4 +17,6 @@ public interface ReviewService {
     Optional<Review> getRestaurantReview(String restaurantId, String reviewId);
 
     Review updateReview(User user, String restaurantId, String reviewId,ReviewCreateUpdateRequest updatedReview);
+
+    void deleteReview(String restaurantId, String reviewId);
 }
