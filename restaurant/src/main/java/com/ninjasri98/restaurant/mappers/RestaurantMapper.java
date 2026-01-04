@@ -20,6 +20,7 @@ import com.ninjasri98.restaurant.domain.entities.Review;
 public interface RestaurantMapper {
     RestaurantCreateUpdateRequest toRestaurantCreateUpdateRequest(RestaurantCreateUpdateRequestDto dto);
 
+    @Mapping(source = "reviews", target = "totalReviews", qualifiedByName = "populateTotalReviews")
     RestaurantDto toRestaurantDto(Restaurant restaurant);
 
     @Mapping(target = "latitude", expression = "java(geoPoint.getLat())")
